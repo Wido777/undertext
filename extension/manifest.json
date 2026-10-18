@@ -5,9 +5,6 @@
   "version": "0.4.1",
   "description": "Shows when a web page hides instructions aimed at AI, or links to an AI assistant with a poisoned prompt. Runs locally.",
   "homepage_url": "https://github.com/Wido777/promptlink",
-  "permissions": [
-    "activeTab"
-  ],
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
@@ -32,8 +29,7 @@
     {
       "matches": [
         "http://*/*",
-        "https://*/*",
-        "file:///*"
+        "https://*/*"
       ],
       "js": [
         "lib/rules.js",
@@ -48,7 +44,12 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "promptlink@wido777.github.io",
-      "strict_min_version": "121.0"
+      "strict_min_version": "128.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
     }
   }
 }

@@ -106,10 +106,9 @@ footer nav a:hover { color: var(--text); }
         <li><strong>What it stores.</strong> Nothing. It does not use browser storage, cookies or any other way of keeping data. Results disappear when you leave or close the page.</li>
         <li><strong>What it sends.</strong> Nothing. It makes no network requests at all, so no page content, browsing history or results ever leave your device.</li>
       </ul>
-      <p>Permissions it uses, and why:</p>
+      <p>It requests no browser permissions. The only access it has, and why:</p>
       <ul>
-        <li><strong>Content scripts on web pages</strong> (<code>http</code>, <code>https</code> and local files). This lets it check each page as it loads and show a warning badge. Chrome describes this as being able to read your data on all websites; promptlink only reads it to run the check, locally.</li>
-        <li><strong><code>activeTab</code></strong>. When you open the pop-up, this lets it ask the current tab for its findings so it can show them to you.</li>
+        <li><strong>Content scripts on web pages</strong> (<code>http</code> and <code>https</code> only). This lets it check each page as it loads and show a warning badge. Chrome describes this as being able to read your data on all websites; promptlink only reads it to run the check, locally.</li>
       </ul>
       <p>There is no analytics, no tracking, no advertising and no third-party code in the extension. We do not sell or share data, because we never have any.</p>
     </section>

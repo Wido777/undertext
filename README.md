@@ -44,7 +44,7 @@ DANGEROUS  - do not open this link
 
 The extension checks every page you visit, as it's actually rendered, so it also catches text hidden by stylesheets or added by scripts after the page loads. The toolbar icon shows a red **!** when a page hides instructions aimed at AI (or has a poisoned "Summarize with AI" link), and a yellow **?** when something is worth a look. Click it to see the exact text, where it was hidden and why it was flagged.
 
-It runs entirely in your browser: no network requests, no storage, and its only permission is `activeTab`.
+It runs entirely in your browser: no network requests, no storage, and it requests no special permissions. Its content script does read every http and https page you visit (which is why Chrome shows "Read and change all your data on all websites"), but only to run the check locally; nothing leaves your browser.
 
 **Install (Chrome, Edge, Brave):** download or clone this repo, open `chrome://extensions`, turn on *Developer mode*, click *Load unpacked* and pick the `extension/` folder.
 **Firefox:** open `about:debugging#/runtime/this-firefox`, click *Load Temporary Add-on* and pick `extension/manifest.json`.
@@ -236,7 +236,8 @@ False alarm: *"From now on, can you explain things more simply?"* This is a real
 ## Limitations
 
 - **Rule-based.** An attacker who reads this repository can word around it. That's the trade-off of open, explainable rules.
-- **Page scanning reads HTML, not the rendered page.** Text added by JavaScript after load, or hidden by complex CSS (external stylesheets, selectors beyond a single class or id), is missed. The browser extension (planned) will see the rendered page.
+- **The command line and web checker read HTML, not the rendered page.** Text added by JavaScript after load, or hidden by complex CSS (external stylesheets, selectors beyond a single class or id), is missed there.
+- **The browser extension reads the rendered page, but uses keyword rules only.** It sees computed styles and text added by scripts, but it has no AI check (`--ai` is command line only). It scans when the page has loaded and once more about 4 seconds later, so text added after that is missed. It does not run on file pages or on pages Chrome protects, such as `chrome://` pages and the Chrome Web Store.
 - **Page rules are new and were tested on a small self-written set** (`eval/pages.py`), so expect false alarms and misses on real pages until the crawl results have been reviewed.
 - **Known assistants only.** New assistants or new prompt parameters need adding to `ASSISTANT_HOSTS` and `PROMPT_PARAMS`.
 - **Short links aren't expanded.** promptlink never makes network requests, so `bit.ly/...` style links can't be resolved. Expand them yourself first with a preview service.

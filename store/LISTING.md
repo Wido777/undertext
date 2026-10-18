@@ -56,7 +56,7 @@ Click the icon to see the exact text, where it was hidden (for example "display:
 
 WHAT IT CAN'T DO
 
-- It uses keyword rules. They catch the known wording, but new or reworded attacks can slip through, and anyone who reads the open rules can write around them. In testing on freshly worded attacks, the rules still missed about a third.
+- It uses keyword rules only. They catch the known "Summarize with AI" templates and show you the hidden text, but they miss many new wordings, and anyone who reads the open rules can write around them. On new attack wordings written after the rules were frozen, the rules alone caught 4 of 22. The optional AI check in the promptlink command-line tool, which the extension does not include, caught 19 of 22.
 - No badge does not prove a page is safe. Treat promptlink as a first filter and a way to see what is hidden, not as a guarantee.
 - It can raise false alarms, for example on articles that quote an attack.
 - Chrome does not let extensions run on some pages, such as the Chrome Web Store and chrome:// pages.
@@ -84,14 +84,16 @@ Website and in-browser link checker:
 https://wido777.github.io/promptlink/
 ```
 
-Length: 2,952 characters (well under any practical limit; the docs set no
+Length: 3,125 characters (well under any practical limit; the docs set no
 explicit maximum, only that the description must follow the keyword spam
 policy).
 
 Source check: every number above is from the README (two samples of 10,000,
 12,726 reachable, 4 poisoning prompts, about 1 in 7 prompt links, 0 malicious
-hidden text; "still miss about a third of freshly-worded attacks"). No scanned
-website is named.
+hidden text; on the fresh unseen set, rules alone 4 of 22 and rules plus AI
+review 19 of 22, from the "How much it helps" table). The reworded unseen set
+(rules alone 5 of 36) is in the same table if a second example is wanted. No
+scanned website is named.
 
 ## 4. Category and language
 
@@ -111,20 +113,15 @@ promptlink checks the page you are viewing for instructions aimed at AI assistan
 ### Permission justifications
 
 The dashboard asks for one justification per permission it finds in the
-package. The manifest declares `activeTab` and a content script on
-`http://*/*`, `https://*/*` and `file:///*`, which the store treats as host
-permissions.
+package. The manifest requests no permissions (no `permissions`,
+`host_permissions` or `optional_permissions` key). Its only access is a
+content script on `http://*/*` and `https://*/*`, which the store treats as
+host access, so that is the only justification needed.
 
-**activeTab**
-
-```
-When you click the promptlink toolbar icon, the popup asks the content script in the current tab for its scan result and shows it to you, and can scroll to and outline a flagged element on that page. It is only used for the tab you are looking at, at the moment you click.
-```
-
-**Host permissions (content script on all http and https pages, and file pages)**
+**Host access (content script on all http and https pages)**
 
 ```
-promptlink's single purpose is to warn you when the page you are viewing hides instructions for AI. To do that, its content script reads each page you open, as rendered, and checks the text and the AI-assistant links in it with rules bundled in the extension. The check runs locally in the page: no page content is sent anywhere or stored, and the extension makes no network requests. It must run on every page because hidden instructions can be on any site, and the toolbar badge has to appear without you clicking first. File pages (file:///) are included so you can check saved pages; Chrome only allows this if you turn on "Allow access to file URLs" for the extension.
+promptlink's single purpose is to warn you when the page you are viewing hides instructions for AI. To do that, its content script reads each page you open, as rendered, and checks the text and the AI-assistant links in it with rules bundled in the extension. The check runs locally in the page: no page content is sent anywhere or stored, and the extension makes no network requests. It must run on every page because hidden instructions can be on any site, and the toolbar badge has to appear without you clicking first. It runs only on http and https pages, not on file pages.
 ```
 
 ### Remote code
@@ -132,7 +129,7 @@ promptlink's single purpose is to warn you when the page you are viewing hides i
 Select **"No, I am not using remote code."**
 
 ```
-All JavaScript is included in the package (content.js, popup.js, background.js and the rule engine in lib/). The extension loads no external scripts, uses no eval, and makes no network requests.
+All JavaScript is included in the package (content.js, popup.js, background.js and the rule engine in lib/). The extension loads no external scripts, uses no eval or new Function, and makes no network requests.
 ```
 
 ### Data usage
@@ -178,7 +175,7 @@ Make sure the page is live (pushed to GitHub Pages) before you submit.
 | Screenshots (1 to 5) | `store/screenshot-1-hidden-instructions.png`, `-2-poisoned-link.png`, `-3-clean-page.png`, `-4-what-it-detects.png` | 1280x800 | At least 1 |
 | Small promo tile | `store/promo-small-440x280.png` | 440x280 | Yes |
 | Marquee promo tile | none | 1400x560 | No |
-| YouTube video | none | | The listing doc groups it with the required assets ("you must provide ... video"). If the dashboard will not submit without it, record a 30-second screen capture of the demo page and upload it to YouTube |
+| YouTube video | none | | No (optional; leave empty) |
 
 Optional fields: Homepage URL `https://wido777.github.io/promptlink/`, Support
 URL `https://github.com/Wido777/promptlink/issues`.
@@ -189,13 +186,12 @@ URL `https://github.com/Wido777/promptlink/issues`.
    accept the developer agreement and pay the one-time $5 registration fee.
 2. Build the package: `python scripts/build_extension.py --zip` writes
    `dist/promptlink-extension-0.4.1-chrome.zip` (Chrome-only manifest, no
-   `test/` folder). The zips currently in `dist/` are 0.3.0 and 0.3.1, so
-   build a fresh one.
+   `test/` folder). Upload that file: `dist/promptlink-extension-0.4.1-chrome.zip`.
 3. In the dashboard, click **New item** and upload the Chrome zip.
 4. **Store listing:** paste the description (section 3), pick category and
    language (section 4), upload the icon, screenshots and small promo tile
    (section 6), add homepage and support URLs.
-5. **Privacy practices:** single purpose, both permission justifications,
+5. **Privacy practices:** single purpose, the host access justification,
    remote code, data usage and certifications, privacy policy URL (section 5).
 6. **Distribution:** visibility Public (or Unlisted for a soft launch), all
    regions, free.

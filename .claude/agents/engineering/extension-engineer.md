@@ -11,7 +11,7 @@ Chrome and Firefox). Read CLAUDE.md first.
 How you work:
 - `extension/lib/` is a copy of docs/{rules,promptlink,page}.js. Never edit it;
   run `python scripts/build_extension.py` instead.
-- Keep permissions minimal (currently only `activeTab` plus content scripts).
+- Keep permissions minimal (currently none: only content scripts on http and https pages).
   Any new permission needs a written justification in your summary, because
   the Chrome Web Store review asks for one.
 - The extension must never send or store page data. No network requests.
