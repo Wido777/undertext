@@ -1,4 +1,4 @@
-# promptlink
+# undertext
 
 Detects instructions aimed at AI that websites hide: in "Summarize with AI"
 links (prefilled `?q=` prompts that try to poison an assistant's memory) and in
@@ -9,12 +9,12 @@ Unicode). Also runs research scans of real websites.
 
 | Area | Where | Notes |
 |---|---|---|
-| Link engine | `promptlink/detector.py` | Rules (`RULES`), URL decoding, scoring. Source of truth for all rules. |
-| Page engine | `promptlink/page.py` | HTML to chunks (`extract_chunks`), `analyse_chunk`, `PAGE_OVERRIDE`, `ADDRESS`, `INSTRUCT`. |
-| AI review | `promptlink/judge.py` | Optional model review. **Can only raise a verdict, never lower it.** |
-| CLI | `promptlink/cli.py` | `promptlink check`, `promptlink page`, `--follow`, `--ai`. |
-| Website | `docs/` | GitHub Pages. `rules.js` is GENERATED. `promptlink.js` and `page.js` are JS ports that must match Python. |
-| Extension | `extension/` | MV3. `extension/lib/` is a COPY of `docs/{rules,promptlink,page}.js`. |
+| Link engine | `undertext/detector.py` | Rules (`RULES`), URL decoding, scoring. Source of truth for all rules. |
+| Page engine | `undertext/page.py` | HTML to chunks (`extract_chunks`), `analyse_chunk`, `PAGE_OVERRIDE`, `ADDRESS`, `INSTRUCT`. |
+| AI review | `undertext/judge.py` | Optional model review. **Can only raise a verdict, never lower it.** |
+| CLI | `undertext/cli.py` | `undertext check`, `undertext page`, `--follow`, `--ai`. |
+| Website | `docs/` | GitHub Pages. `rules.js` is GENERATED. `undertext.js` and `page.js` are JS ports that must match Python. |
+| Extension | `extension/` | MV3. `extension/lib/` is a COPY of `docs/{rules,undertext,page}.js`. |
 | Research | `research/` | `scan.py` (crawler), `summarize.py`, `review.py`, `ai_review.py`. |
 | Evaluation | `eval/` | Labelled sets and runners. |
 | CI | `.github/workflows/` | `tests.yml`, `scan.yml`, `review.yml`, `ai-eval.yml`. |

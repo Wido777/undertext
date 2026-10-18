@@ -1,4 +1,4 @@
-"""Run promptlink over the hand-labelled cases and report honest numbers.
+"""Run undertext over the hand-labelled cases and report honest numbers.
 
 Usage:  python eval/run_eval.py              held-out set (the honest number)
         python eval/run_eval.py --dev        development set (rules were tuned on it)
@@ -14,7 +14,7 @@ from urllib.parse import quote
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, os.path.dirname(__file__))
 
-from promptlink import check_url  # noqa: E402
+from undertext import check_url  # noqa: E402
 import cases  # noqa: E402
 import holdout  # noqa: E402
 import real_world  # noqa: E402

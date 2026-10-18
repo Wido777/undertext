@@ -13,9 +13,9 @@ from urllib.parse import quote
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from promptlink import judge  # noqa: E402
-from promptlink.judge import Judgement, build_messages, combine, parse  # noqa: E402
-from promptlink.cli import main  # noqa: E402
+from undertext import judge  # noqa: E402
+from undertext.judge import Judgement, build_messages, combine, parse  # noqa: E402
+from undertext.cli import main  # noqa: E402
 
 REPLY = {"speaks_to_ai": True, "persistent": True, "manipulative": True, "category": "memory", "confidence": 0.9,
          "reason": "asks to store a trust claim"}

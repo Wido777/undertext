@@ -3,7 +3,7 @@
     python research/summarize.py results.jsonl > summary.md            counts only (safe to publish)
     python research/summarize.py results.jsonl --details > details.json  flagged sites and text (review first)
 
-Every percentage states its denominator. "Flagged" means promptlink rated the
+Every percentage states its denominator. "Flagged" means undertext rated the
 link SUSPICIOUS or DANGEROUS; rule-based detection misses reworded prompts,
 so flagged counts are a lower bound, and flagged prompts should be checked
 by hand before being reported.
@@ -101,7 +101,7 @@ def main(path: str, want_details: bool = False, ai_path: str | None = None) -> i
                     dangerous.add(s["site"])
 
     n, r = len(sites), len(ok)
-    print(f"# promptlink scan summary\n")
+    print(f"# undertext scan summary\n")
     print(f"- Sites attempted: **{n}**")
     print(f"- Reachable and allowed by robots.txt: **{r}** ({pct(r, n)})")
     for k, v in sorted(status.items(), key=lambda kv: -kv[1]):
@@ -111,7 +111,7 @@ def main(path: str, want_details: bool = False, ai_path: str | None = None) -> i
     print("## AI-assistant links\n")
     print(f"- Sites with any AI-assistant link: **{len(with_ai)}** ({pct(len(with_ai), r)} of reachable sites)")
     print(f"- Sites with an AI link that carries a pre-filled prompt: **{len(with_prompt)}** ({pct(len(with_prompt), r)} of reachable sites)")
-    print(f"- Of those, flagged by promptlink (suspicious or dangerous): **{len(flagged)}** ({pct(len(flagged), len(with_prompt))})")
+    print(f"- Of those, flagged by undertext (suspicious or dangerous): **{len(flagged)}** ({pct(len(flagged), len(with_prompt))})")
     print(f"- Of those, rated dangerous: **{len(dangerous)}** ({pct(len(dangerous), len(with_prompt))})\n")
     if assistants:
         print("Assistants targeted (links with a prompt): " + ", ".join(f"{a} {c}" for a, c in assistants.most_common()) + "\n")

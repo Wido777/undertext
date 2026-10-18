@@ -2,7 +2,7 @@
 
 These were read from the buttons on real public pages (the links were never
 opened). Labels were written from what each prompt tries to do before
-promptlink was run on them, and no rule was changed in response.
+undertext was run on them, and no rule was changed in response.
 
 This is the honest real-world test of v0.2.0. It is small: 2 malicious
 prompts (across 8 links) and 5 benign prompts from 4 sites.

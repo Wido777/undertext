@@ -1,10 +1,10 @@
-// UI for the promptlink web checker.
+// UI for the undertext web checker.
 // Safety: attacker-controlled text (links, prompts, evidence) is only ever
 // inserted with textContent / text nodes, never as HTML, and checked links
 // are never rendered as clickable anchors.
 (function () {
   "use strict";
-  var pl = window.promptlink, RULES = window.PROMPTLINK_RULES, pg = window.promptlinkPage;
+  var pl = window.undertext, RULES = window.UNDERTEXT_RULES, pg = window.undertextPage;
   var $ = function (id) { return document.getElementById(id); };
   var input = $("input"), results = $("results");
   var enc = encodeURIComponent;
@@ -38,7 +38,7 @@
     SUSPICIOUS: ["Suspicious", "Read what it asks your AI below before you open it."],
     LOOKS_SAFE: ["No tricks found", "It only asks what you see below. Still worth a quick read."],
     NO_PROMPT: ["Nothing hidden", "This link opens an assistant with nothing pre-filled."],
-    NOT_ASSISTANT_LINK: ["Not an AI link", "It doesn't open ChatGPT, Claude or another assistant promptlink knows."],
+    NOT_ASSISTANT_LINK: ["Not an AI link", "It doesn't open ChatGPT, Claude or another assistant undertext knows."],
     SKIPPED: ["Skipped", "This line doesn't look like a link."]
   };
 

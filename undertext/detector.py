@@ -1,4 +1,4 @@
-"""Core detection logic for promptlink.
+"""Core detection logic for undertext.
 
 Takes a URL, finds any prompt that would be pre-filled into an AI assistant
 when the link is opened, and scores it for memory-poisoning and related

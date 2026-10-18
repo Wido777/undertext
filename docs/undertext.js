@@ -1,12 +1,12 @@
-// promptlink web engine: a line-by-line port of promptlink/detector.py.
+// undertext web engine: a line-by-line port of undertext/detector.py.
 // The detection RULES are not duplicated here; they are generated from the
 // Python source into rules.js. tests/test_web_parity.py checks that this
 // file and the Python version give identical results.
 (function (g) {
   "use strict";
 
-  var R = g.PROMPTLINK_RULES || (typeof require !== "undefined" ? require("./rules.js") : null);
-  if (!R) throw new Error("rules.js must be loaded before promptlink.js");
+  var R = g.UNDERTEXT_RULES || (typeof require !== "undefined" ? require("./rules.js") : null);
+  if (!R) throw new Error("rules.js must be loaded before undertext.js");
 
   var WORD = "\\p{L}\\p{N}_";
   var TAG_START = 0xE0000, TAG_END = 0xE0080;
@@ -58,7 +58,7 @@
     return out;
   }
 
-  // Python urllib.parse.urlsplit (the parts promptlink uses)
+  // Python urllib.parse.urlsplit (the parts undertext uses)
   function urlsplit(url) {
     url = url.replace(/[\t\r\n]/g, "");
     var scheme = "", netloc = "", query = "", fragment = "";
@@ -348,6 +348,6 @@
   var api = { version: R.version, checkUrl: checkUrl, scanHtml: scanHtml, extractLinks: extractLinks,
               analysePrompt: analysePrompt, isHidden: isHidden, normalise: normalise, runRules: runRules,
               hiddenCharacters: hiddenCharacters, decodeTags: decodeTags };
-  g.promptlink = api;
+  g.undertext = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof globalThis !== "undefined" ? globalThis : this);

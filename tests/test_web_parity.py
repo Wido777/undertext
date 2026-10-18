@@ -1,7 +1,7 @@
 """The web checker (docs/) must behave exactly like the Python package.
 
-1. docs/rules.js must match a fresh export of promptlink/detector.py.
-2. docs/promptlink.js must give identical results to promptlink.check_url
+1. docs/rules.js must match a fresh export of undertext/detector.py.
+2. docs/undertext.js must give identical results to undertext.check_url
    and scan_html on every evaluation link, the edge cases below, and a
    batch of randomly generated links.
 
@@ -21,13 +21,13 @@ from urllib.parse import quote
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path[:0] = [ROOT, os.path.join(ROOT, "eval"), os.path.join(ROOT, "scripts")]
 
-from promptlink import check_url, scan_html  # noqa: E402
+from undertext import check_url, scan_html  # noqa: E402
 import cases as dev  # noqa: E402
 import holdout  # noqa: E402
 import real_world  # noqa: E402
 import export_web_rules  # noqa: E402
 import pages  # noqa: E402
-from promptlink.page import Chunk, extract_chunks, scan_chunks  # noqa: E402
+from undertext.page import Chunk, extract_chunks, scan_chunks  # noqa: E402
 
 COMPARED = ("assistant", "param", "prompt", "verdict", "score", "notes")
 

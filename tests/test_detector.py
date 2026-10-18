@@ -5,8 +5,8 @@ import unittest
 from contextlib import redirect_stdout
 from urllib.parse import quote
 
-from promptlink import check_url, scan_html
-from promptlink.cli import main
+from undertext import check_url, scan_html
+from undertext.cli import main
 
 
 def link(host_path: str, prompt: str, param: str = "q") -> str:

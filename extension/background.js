@@ -8,10 +8,10 @@ const BADGE = {
 };
 
 api.runtime.onMessage.addListener((msg, sender) => {
-  if (!msg || msg.type !== "promptlink:result" || !sender.tab) return;
+  if (!msg || msg.type !== "undertext:result" || !sender.tab) return;
   const tabId = sender.tab.id;
   const b = BADGE[msg.verdict];
   api.action.setBadgeText({ tabId, text: b ? b.text : "" });
   if (b) api.action.setBadgeBackgroundColor({ tabId, color: b.color });
-  api.action.setTitle({ tabId, title: msg.title || "promptlink" });
+  api.action.setTitle({ tabId, title: msg.title || "undertext" });
 });

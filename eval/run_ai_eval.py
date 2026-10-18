@@ -4,7 +4,7 @@
 
 "Flagged" means SUSPICIOUS or DANGEROUS. For the AI alone, flagged means the
 model said manipulative with confidence >= judge.RAISE_AT. Combined is what
-`promptlink --ai` reports: the rules' verdict, raised by the AI, never lowered.
+`undertext --ai` reports: the rules' verdict, raised by the AI, never lowered.
 A reply the tool could not use counts as "not flagged" for the AI and is
 reported separately, so errors can't hide.
 """
@@ -21,9 +21,9 @@ from urllib.parse import quote
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path[:0] = [ROOT, os.path.join(ROOT, "eval")]
 
-from promptlink import check_url  # noqa: E402
-from promptlink.judge import combine, make_reviewer  # noqa: E402
-from promptlink.page import Chunk, analyse_chunk  # noqa: E402
+from undertext import check_url  # noqa: E402
+from undertext.judge import combine, make_reviewer  # noqa: E402
+from undertext.page import Chunk, analyse_chunk  # noqa: E402
 import cases  # noqa: E402
 import holdout  # noqa: E402
 import in_the_wild  # noqa: E402
@@ -32,7 +32,7 @@ import real_world  # noqa: E402
 import reworded  # noqa: E402
 import fresh  # noqa: E402
 import scan_10k  # noqa: E402
-from promptlink.page import extract_chunks  # noqa: E402
+from undertext.page import extract_chunks  # noqa: E402
 
 FLAGGED = {"SUSPICIOUS", "DANGEROUS"}
 

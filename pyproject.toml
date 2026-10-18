@@ -3,7 +3,7 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "promptlink"
+name = "undertext"
 version = "0.4.1"
 description = "Detect instructions aimed at AI hidden in assistant links (\"Summarize with AI\" buttons) and in web page content."
 readme = "README.md"
@@ -14,10 +14,10 @@ authors = [{ name = "Wido777" }]
 keywords = ["security", "prompt-injection", "llm", "memory-poisoning", "ai-security"]
 
 [project.urls]
-Homepage = "https://github.com/Wido777/promptlink"
+Homepage = "https://github.com/Wido777/undertext"
 
 [project.scripts]
-promptlink = "promptlink.cli:main"
+undertext = "undertext.cli:main"
 
 [tool.setuptools]
-packages = ["promptlink"]
+packages = ["undertext"]

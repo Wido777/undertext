@@ -18,8 +18,8 @@ import sys
 import time
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from promptlink.judge import make_reviewer  # noqa: E402
-from promptlink.page import AI_STRICT, normalise  # noqa: E402
+from undertext.judge import make_reviewer  # noqa: E402
+from undertext.page import AI_STRICT, normalise  # noqa: E402
 import re  # noqa: E402
 
 STRICT = re.compile(r"\b" + AI_STRICT + r"\b", re.I)

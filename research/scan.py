@@ -1,7 +1,7 @@
 """Scan many websites for AI-assistant links that carry hidden prompts.
 
 For each site: check robots.txt, fetch the homepage, pick a few article pages
-linked from it, and run promptlink over
+linked from it, and run undertext over
   - every AI-assistant link found (links, buttons, URLs inside scripts), and
   - the page content itself: hidden text, comments, alt text, meta tags and
     structured data that speak to an AI and give it orders.
@@ -37,11 +37,11 @@ from urllib.parse import urljoin, urlsplit
 from urllib.request import Request, build_opener, HTTPRedirectHandler
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
-from promptlink import __version__  # noqa: E402
-from promptlink.detector import scan_html, ASSISTANT_HOSTS, PATH_ASSISTANTS  # noqa: E402
-from promptlink.page import candidate_chunks, extract_chunks, scan_chunks, scan_text_file  # noqa: E402
+from undertext import __version__  # noqa: E402
+from undertext.detector import scan_html, ASSISTANT_HOSTS, PATH_ASSISTANTS  # noqa: E402
+from undertext.page import candidate_chunks, extract_chunks, scan_chunks, scan_text_file  # noqa: E402
 
-USER_AGENT = ("promptlink-research/%s (+https://github.com/Wido777/promptlink; "
+USER_AGENT = ("undertext-research/%s (+https://github.com/Wido777/undertext; "
               "reads public pages to measure AI memory-poisoning links)" % __version__)
 TIMEOUT = 12
 MAX_BYTES = 3_000_000

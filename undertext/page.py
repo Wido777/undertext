@@ -10,7 +10,7 @@ This module splits a page into text chunks, notes where each chunk lives and
 whether a visitor can see it, and flags chunks that address an AI and give it
 orders. Nothing is executed and no network request is made.
 
-    from promptlink.page import scan_page_content
+    from undertext.page import scan_page_content
     report = scan_page_content(html)
 """
 

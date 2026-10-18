@@ -6,7 +6,7 @@ model: inherit
 color: red
 ---
 
-You are the reviewer for promptlink. You never edit files. Read CLAUDE.md, then
+You are the reviewer for undertext. You never edit files. Read CLAUDE.md, then
 review the change you are given (use `git diff` and `git diff --staged`).
 
 Check, in this order:

@@ -1,9 +1,9 @@
 """Copy the shared engine into the browser extension and package it.
 
-    python scripts/build_extension.py          copy docs/{rules,promptlink,page}.js into extension/lib/
+    python scripts/build_extension.py          copy docs/{rules,undertext,page}.js into extension/lib/
     python scripts/build_extension.py --zip    also write one store zip per browser:
-                                                 dist/promptlink-extension-<version>-chrome.zip
-                                                 dist/promptlink-extension-<version>-firefox.zip
+                                                 dist/undertext-extension-<version>-chrome.zip
+                                                 dist/undertext-extension-<version>-firefox.zip
 
 The extension uses exactly the same generated rules and engine as the web
 checker; tests/test_extension.py fails if the copies are out of date.
@@ -31,7 +31,7 @@ import zipfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EXT = os.path.join(ROOT, "extension")
-SHARED = ("rules.js", "promptlink.js", "page.js")
+SHARED = ("rules.js", "undertext.js", "page.js")
 BROWSERS = ("chrome", "firefox")
 
 
@@ -96,7 +96,7 @@ def files(m: dict | None = None) -> list[str]:
 def package(browser: str) -> str:
     m = manifest_for(browser)
     os.makedirs(os.path.join(ROOT, "dist"), exist_ok=True)
-    out = os.path.join(ROOT, "dist", f"promptlink-extension-{m['version']}-{browser}.zip")
+    out = os.path.join(ROOT, "dist", f"undertext-extension-{m['version']}-{browser}.zip")
     with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
         z.writestr("manifest.json", json.dumps(m, indent=2) + "\n")
         for rel in files(m):

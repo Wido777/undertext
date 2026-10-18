@@ -9,7 +9,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 class ExtensionUpToDate(unittest.TestCase):
     def test_engine_copies_match(self):
-        for name in ("rules.js", "promptlink.js", "page.js"):
+        for name in ("rules.js", "undertext.js", "page.js"):
             with open(os.path.join(ROOT, "docs", name), encoding="utf-8") as a, \
                  open(os.path.join(ROOT, "extension", "lib", name), encoding="utf-8") as b:
                 self.assertEqual(a.read(), b.read(), f"extension/lib/{name} is stale: run python scripts/build_extension.py")
@@ -17,7 +17,7 @@ class ExtensionUpToDate(unittest.TestCase):
     def test_manifest(self):
         with open(os.path.join(ROOT, "extension", "manifest.json"), encoding="utf-8") as fh:
             m = json.load(fh)
-        from promptlink import __version__
+        from undertext import __version__
         self.assertEqual(m["version"], __version__)
         # No API permissions at all: no activeTab, tabs, storage, scripting or network.
         self.assertNotIn("permissions", m)
@@ -53,7 +53,7 @@ class ExtensionUpToDate(unittest.TestCase):
         self.assertFalse([f for f in packaged if f.startswith("test/")], "demo pages must not ship")
         self.assertFalse([f for f in packaged if f.endswith(("~", ".bak", ".swp", ".DS_Store", ".md"))], packaged)
         for f in ("background.js", "content.js", "popup.html", "popup.js", "popup.css", "lib/rules.js",
-                  "lib/promptlink.js", "lib/page.js", "icons/icon128.png"):
+                  "lib/undertext.js", "lib/page.js", "icons/icon128.png"):
             self.assertIn(f, packaged)
 
     def test_no_risky_apis(self):

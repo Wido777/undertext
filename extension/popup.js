@@ -2,14 +2,14 @@
 // Page text is inserted with textContent only, never as HTML.
 const api = globalThis.browser || globalThis.chrome;
 const out = document.getElementById("out");
-document.getElementById("ver").textContent = "v" + (globalThis.PROMPTLINK_RULES ? globalThis.PROMPTLINK_RULES.version : "");
+document.getElementById("ver").textContent = "v" + (globalThis.UNDERTEXT_RULES ? globalThis.UNDERTEXT_RULES.version : "");
 
 const HEAD = {
   DANGEROUS: ["Hidden instructions for AI", "This page tries to steer an AI assistant that reads it. Be careful asking an AI to summarise or act on it."],
   SUSPICIOUS: ["Worth a look", "This page talks to AI in a way that might be an attempt to steer it."],
   LOOKS_SAFE: ["Nothing hidden for AI", "No instructions aimed at AI found on this page."],
 };
-const WHERE = (globalThis.PROMPTLINK_RULES && globalThis.PROMPTLINK_RULES.page.whereText) || {};
+const WHERE = (globalThis.UNDERTEXT_RULES && globalThis.UNDERTEXT_RULES.page.whereText) || {};
 
 function el(tag, cls, text) {
   const e = document.createElement(tag);
@@ -63,14 +63,14 @@ function render(r, tabId) {
       const label = (WHERE[f.where] || f.where) + (f.how && f.where === "hidden" ? " (" + f.how + ")" : "");
       const hidden = f.where !== "visible";
       out.append(item(f.verdict, label, f.text, f.rules.filter((x) => !x.rule.startsWith("AIP-003")),
-        f.canShow && !hidden ? () => send(tabId, { type: "promptlink:show", kind: "content", i: f.i }) : null));
+        f.canShow && !hidden ? () => send(tabId, { type: "undertext:show", kind: "content", i: f.i }) : null));
     });
   }
   const flaggedLinks = r.links.filter((l) => l.verdict !== "LOOKS_SAFE");
   if (flaggedLinks.length) {
     out.append(el("h2", null, "In AI-assistant links"));
     flaggedLinks.forEach((l) => out.append(item(l.verdict, "opens " + l.assistant, l.prompt, l.rules,
-      () => send(tabId, { type: "promptlink:show", kind: "link", i: l.i }))));
+      () => send(tabId, { type: "undertext:show", kind: "link", i: l.i }))));
   }
   const stats = el("p", "stats",
     `Read ${r.content.chunks} text blocks (${r.content.hidden_chunks} hidden from view) and ` +
@@ -83,9 +83,9 @@ function render(r, tabId) {
     const p = api.tabs.query({ active: true, currentWindow: true }, res);
     if (p && p.then) p.then(res);
   });
-  const r = tab ? await send(tab.id, { type: "promptlink:scan" }) : null;
+  const r = tab ? await send(tab.id, { type: "undertext:scan" }) : null;
   out.textContent = "";
-  if (!r) out.append(el("p", "dim", "promptlink can't read this page. It works on normal web pages; " +
-                                     "if this one was open before you installed promptlink, reload it."));
+  if (!r) out.append(el("p", "dim", "undertext can't read this page. It works on normal web pages; " +
+                                     "if this one was open before you installed undertext, reload it."));
   else render(r, tab.id);
 })();

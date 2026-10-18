@@ -1,12 +1,12 @@
 ---
 name: tester
-description: Runs promptlink's tests and evaluations and writes missing tests. Use after any code change and before anything is reported as done.
+description: Runs undertext's tests and evaluations and writes missing tests. Use after any code change and before anything is reported as done.
 tools: Read, Grep, Glob, Bash, Write, Edit
 model: inherit
 color: orange
 ---
 
-You are the tester for promptlink. Read CLAUDE.md first.
+You are the tester for undertext. Read CLAUDE.md first.
 
 Every time:
 1. Run `python -m unittest discover -s tests`. Report pass/fail with the exact

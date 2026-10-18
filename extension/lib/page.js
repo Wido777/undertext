@@ -1,5 +1,5 @@
-// promptlink page engine: a port of analyse_chunk / scan_chunks from
-// promptlink/page.py. Patterns come from rules.js (generated from Python);
+// undertext page engine: a port of analyse_chunk / scan_chunks from
+// undertext/page.py. Patterns come from rules.js (generated from Python);
 // tests/test_web_parity.py checks both versions agree on every chunk.
 //
 // A "chunk" is { text, where, how, tag }. Where the text came from (hidden
@@ -8,9 +8,9 @@
 (function (g) {
   "use strict";
 
-  var R = g.PROMPTLINK_RULES || (typeof require !== "undefined" ? require("./rules.js") : null);
-  var PL = g.promptlink || (typeof require !== "undefined" ? require("./promptlink.js") : null);
-  if (!R || !PL) throw new Error("load rules.js and promptlink.js before page.js");
+  var R = g.UNDERTEXT_RULES || (typeof require !== "undefined" ? require("./rules.js") : null);
+  var PL = g.undertext || (typeof require !== "undefined" ? require("./undertext.js") : null);
+  if (!R || !PL) throw new Error("load rules.js and undertext.js before page.js");
 
   var P = R.page;
   var ADDRESS = new RegExp(P.address, "iu");
@@ -84,7 +84,7 @@
   }
 
   // ------------------------------------------------------------------
-  // Pasted page code -> chunks. A port of promptlink/page.py's _Extractor
+  // Pasted page code -> chunks. A port of undertext/page.py's _Extractor
   // (the crawler's view of a page: inline styles, <style> classes, hidden
   // attributes, comments, alt/title text, meta tags, JSON-LD). Works on a
   // string with a small tokenizer, so nothing in the pasted page is ever
@@ -267,6 +267,6 @@
   var api = { analyseChunk: analyseChunk, scanChunks: scanChunks, extractChunks: extractChunks, scanPageHtml: scanPageHtml,
               whereText: P.whereText,
               metaNames: P.metaNames, textAttrs: P.textAttrs, srClasses: P.srClasses };
-  g.promptlinkPage = api;
+  g.undertextPage = api;
   if (typeof module !== "undefined" && module.exports) module.exports = api;
 })(typeof globalThis !== "undefined" ? globalThis : this);

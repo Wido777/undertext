@@ -122,7 +122,7 @@ class ScanFakeSites(unittest.TestCase):
         self.assertEqual(self.results["http://127.0.0.1:1"]["status"], "unreachable")
 
     def test_identifies_itself(self):
-        self.assertTrue(test_sites.LOG and all("UA=promptlink-research" in l for l in test_sites.LOG))
+        self.assertTrue(test_sites.LOG and all("UA=undertext-research" in l for l in test_sites.LOG))
 
 
 if __name__ == "__main__":

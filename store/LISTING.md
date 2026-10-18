@@ -1,4 +1,4 @@
-# Chrome Web Store listing: promptlink
+# Chrome Web Store listing: undertext
 
 Everything to paste into the Chrome Web Store developer dashboard for the
 extension in `extension/` (manifest version 0.4.1). Text inside code blocks is
@@ -10,7 +10,7 @@ detailed description is plain text.
 ## 1. Name
 
 ```
-promptlink
+undertext
 ```
 
 Taken from `name` in `manifest.json`. The dashboard shows the manifest name; it
@@ -35,7 +35,7 @@ Length: **119 characters** (limit 132).
 Paste into **Store listing > Product details > Description**.
 
 ```
-promptlink shows you when a web page hides instructions meant for AI assistants.
+undertext shows you when a web page hides instructions meant for AI assistants.
 
 THE PROBLEM
 
@@ -46,7 +46,7 @@ AI assistants read web pages for you, and some sites now write for the AI instea
 
 WHAT IT DOES
 
-promptlink checks each page you visit, as it is actually rendered, so it also sees text hidden by stylesheets or added by scripts after the page loads.
+undertext checks each page you visit, as it is actually rendered, so it also sees text hidden by stylesheets or added by scripts after the page loads.
 
 - A red ! on the toolbar icon means the page hides instructions aimed at AI, or has an AI-assistant link with a poisoned prompt.
 - A yellow ? means something is worth a look.
@@ -56,14 +56,14 @@ Click the icon to see the exact text, where it was hidden (for example "display:
 
 WHAT IT CAN'T DO
 
-- It uses keyword rules only. They catch the known "Summarize with AI" templates and show you the hidden text, but they miss many new wordings, and anyone who reads the open rules can write around them. On new attack wordings written after the rules were frozen, the rules alone caught 4 of 22. The optional AI check in the promptlink command-line tool, which the extension does not include, caught 19 of 22.
-- No badge does not prove a page is safe. Treat promptlink as a first filter and a way to see what is hidden, not as a guarantee.
+- It uses keyword rules only. They catch the known "Summarize with AI" templates and show you the hidden text, but they miss many new wordings, and anyone who reads the open rules can write around them. On new attack wordings written after the rules were frozen, the rules alone caught 4 of 22. The optional AI check in the undertext command-line tool, which the extension does not include, caught 19 of 22.
+- No badge does not prove a page is safe. Treat undertext as a first filter and a way to see what is hidden, not as a guarantee.
 - It can raise false alarms, for example on articles that quote an attack.
 - Chrome does not let extensions run on some pages, such as the Chrome Web Store and chrome:// pages.
 
 PRIVACY
 
-promptlink runs entirely in your browser. It reads the page you are on to run the check, and that's it: it makes no network requests, stores nothing, and has no account, analytics or tracking. It never opens the links it checks.
+undertext runs entirely in your browser. It reads the page you are on to run the check, and that's it: it makes no network requests, stores nothing, and has no account, analytics or tracking. It never opens the links it checks.
 
 THE RESEARCH BEHIND IT
 
@@ -73,15 +73,15 @@ The rules were tested on two random scans of 10,000 websites each, with every fl
 - Of the sites that put a prompt in an AI link, about 1 in 7 used it to plant themselves in the assistant's memory.
 - 0 had hidden page text giving AI harmful orders.
 
-So hidden instructions are rare on ordinary sites today. promptlink is there for the cases that do happen, and to show you exactly what a page is telling your AI.
+So hidden instructions are rare on ordinary sites today. undertext is there for the cases that do happen, and to show you exactly what a page is telling your AI.
 
 OPEN SOURCE
 
 The code, the rules and the full evaluation, including the misses, are public:
-https://github.com/Wido777/promptlink
+https://github.com/Wido777/undertext
 
 Website and in-browser link checker:
-https://wido777.github.io/promptlink/
+https://wido777.github.io/undertext/
 ```
 
 Length: 3,125 characters (well under any practical limit; the docs set no
@@ -107,7 +107,7 @@ scanned website is named.
 ### Single purpose
 
 ```
-promptlink checks the page you are viewing for instructions aimed at AI assistants, hidden in the page or in prefilled AI-assistant links, and shows the result on its toolbar icon.
+undertext checks the page you are viewing for instructions aimed at AI assistants, hidden in the page or in prefilled AI-assistant links, and shows the result on its toolbar icon.
 ```
 
 ### Permission justifications
@@ -121,7 +121,7 @@ host access, so that is the only justification needed.
 **Host access (content script on all http and https pages)**
 
 ```
-promptlink's single purpose is to warn you when the page you are viewing hides instructions for AI. To do that, its content script reads each page you open, as rendered, and checks the text and the AI-assistant links in it with rules bundled in the extension. The check runs locally in the page: no page content is sent anywhere or stored, and the extension makes no network requests. It must run on every page because hidden instructions can be on any site, and the toolbar badge has to appear without you clicking first. It runs only on http and https pages, not on file pages.
+undertext's single purpose is to warn you when the page you are viewing hides instructions for AI. To do that, its content script reads each page you open, as rendered, and checks the text and the AI-assistant links in it with rules bundled in the extension. The check runs locally in the page: no page content is sent anywhere or stored, and the extension makes no network requests. It must run on every page because hidden instructions can be on any site, and the toolbar badge has to appear without you clicking first. It runs only on http and https pages, not on file pages.
 ```
 
 ### Remote code
@@ -138,7 +138,7 @@ All JavaScript is included in the package (content.js, popup.js, background.js a
 they *handle* user data "even when data is processed or stored locally on a
 user's device and is not transmitted to external servers or third parties"
 (User Data FAQ, question 3), and list "capturing data from a web page" as an
-example of handling. promptlink reads the content of every page to scan it,
+example of handling. undertext reads the content of every page to scan it,
 even though nothing leaves the browser.
 
 - **Recommended (safer for review):** tick **Website content** only, and no
@@ -162,7 +162,7 @@ Tick all three certifications:
 ### Privacy policy URL
 
 ```
-https://wido777.github.io/promptlink/privacy.html
+https://wido777.github.io/undertext/privacy.html
 ```
 
 Make sure the page is live (pushed to GitHub Pages) before you submit.
@@ -177,16 +177,16 @@ Make sure the page is live (pushed to GitHub Pages) before you submit.
 | Marquee promo tile | none | 1400x560 | No |
 | YouTube video | none | | No (optional; leave empty) |
 
-Optional fields: Homepage URL `https://wido777.github.io/promptlink/`, Support
-URL `https://github.com/Wido777/promptlink/issues`.
+Optional fields: Homepage URL `https://wido777.github.io/undertext/`, Support
+URL `https://github.com/Wido777/undertext/issues`.
 
 ## 7. Upload checklist
 
 1. Register a developer account at the Chrome Web Store developer dashboard:
    accept the developer agreement and pay the one-time $5 registration fee.
 2. Build the package: `python scripts/build_extension.py --zip` writes
-   `dist/promptlink-extension-0.4.1-chrome.zip` (Chrome-only manifest, no
-   `test/` folder). Upload that file: `dist/promptlink-extension-0.4.1-chrome.zip`.
+   `dist/undertext-extension-0.4.1-chrome.zip` (Chrome-only manifest, no
+   `test/` folder). Upload that file: `dist/undertext-extension-0.4.1-chrome.zip`.
 3. In the dashboard, click **New item** and upload the Chrome zip.
 4. **Store listing:** paste the description (section 3), pick category and
    language (section 4), upload the icon, screenshots and small promo tile

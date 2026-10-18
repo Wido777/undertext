@@ -15,7 +15,7 @@ not as "safe".
 Backends (no extra dependencies, plain HTTPS):
     ollama      a model running locally (default http://localhost:11434)
     openai      any OpenAI-compatible API, using your own key (OPENAI_API_KEY,
-                PROMPTLINK_AI_BASE_URL to point elsewhere)
+                UNDERTEXT_AI_BASE_URL to point elsewhere)
     anthropic   the Anthropic API, using your own key (ANTHROPIC_API_KEY)
 
 Nothing is sent anywhere unless you turn the review on.
@@ -207,7 +207,7 @@ class OpenAIReviewer(Reviewer):
                  timeout: float = 60):
         super().__init__(model, timeout)
         self.key = api_key or os.environ.get("OPENAI_API_KEY", "")
-        self.base = (base_url or os.environ.get("PROMPTLINK_AI_BASE_URL") or "https://api.openai.com/v1").rstrip("/")
+        self.base = (base_url or os.environ.get("UNDERTEXT_AI_BASE_URL") or os.environ.get("PROMPTLINK_AI_BASE_URL") or "https://api.openai.com/v1").rstrip("/")
         if not self.key:
             raise ValueError("set OPENAI_API_KEY (your own key) to use the openai reviewer")
 

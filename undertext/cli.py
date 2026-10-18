@@ -1,4 +1,4 @@
-"""Command-line interface for promptlink."""
+"""Command-line interface for undertext."""
 
 from __future__ import annotations
 
@@ -71,7 +71,7 @@ CONTENT_LABELS = {
 def fetch_page(url: str) -> str:
     """Download one page (only when the user asks for it with a URL or --follow)."""
     from urllib.request import Request, urlopen
-    req = Request(url, headers={"User-Agent": f"promptlink/{__version__} (+https://github.com/Wido777/promptlink)",
+    req = Request(url, headers={"User-Agent": f"undertext/{__version__} (+https://github.com/Wido777/undertext)",
                                 "Accept": "text/html,application/xhtml+xml,text/plain"})
     with urlopen(req, timeout=15) as r:
         raw = r.read(5_000_000)
@@ -137,11 +137,11 @@ def ai_review_page(html: str, reviewer):
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
-        prog="promptlink",
+        prog="undertext",
         description="Check AI-assistant links (ChatGPT, Copilot, Claude, Perplexity, Grok, ...) "
                     "for hidden prompts that try to poison the assistant's memory. "
                     "Links are never opened.")
-    parser.add_argument("--version", action="version", version=f"promptlink {__version__}")
+    parser.add_argument("--version", action="version", version=f"undertext {__version__}")
     sub = parser.add_subparsers(dest="command", required=True)
 
     p_check = sub.add_parser("check", help="check one or more links")

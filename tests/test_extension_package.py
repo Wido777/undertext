@@ -44,7 +44,7 @@ class StoreZips(unittest.TestCase):
                 for browser in be.BROWSERS:
                     path = be.package(browser)
                     version = be.load_manifest()["version"]
-                    self.assertEqual(os.path.basename(path), f"promptlink-extension-{version}-{browser}.zip")
+                    self.assertEqual(os.path.basename(path), f"undertext-extension-{version}-{browser}.zip")
                     with zipfile.ZipFile(path) as z:
                         names = z.namelist()
                         self.assertIsNone(z.testzip())

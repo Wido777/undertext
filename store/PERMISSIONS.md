@@ -1,12 +1,12 @@
 # Chrome Web Store: privacy practices answers
 
 Text for the "Privacy practices" tab of the developer dashboard. Upload
-`dist/promptlink-extension-<version>-chrome.zip` (built with
+`dist/undertext-extension-<version>-chrome.zip` (built with
 `python scripts/build_extension.py --zip`).
 
 ## Single purpose
 
-promptlink shows you when the web page you are on hides instructions aimed at
+undertext shows you when the web page you are on hides instructions aimed at
 AI assistants, such as hidden text that tells an AI what to say, or a
 "Summarize with AI" link whose prefilled prompt tries to plant a brand in the
 assistant's memory. It marks the toolbar icon with a badge and lists what it
@@ -21,12 +21,12 @@ asks about is the content script, which the store treats as host access.
 **Content script on http://\*/\* and https://\*/\* (host access)**
 
 ```
-To show the warning badge before you ask an AI about a page, promptlink has to read each page you visit. The content script checks the page's text, hidden elements, comments, attributes, meta tags and AI-assistant links inside your browser and sends only the verdict (safe, suspicious or dangerous) to the extension's own background script to set the badge. No page content, URL or browsing history is stored, logged or sent anywhere. It runs only on normal web pages (http and https), not on file pages or other schemes.
+To show the warning badge before you ask an AI about a page, undertext has to read each page you visit. The content script checks the page's text, hidden elements, comments, attributes, meta tags and AI-assistant links inside your browser and sends only the verdict (safe, suspicious or dangerous) to the extension's own background script to set the badge. No page content, URL or browsing history is stored, logged or sent anywhere. It runs only on normal web pages (http and https), not on file pages or other schemes.
 ```
 
 The popup needs no permission either: it finds the current tab with
 `chrome.tabs.query` (tab ids are available without the `tabs` permission) and
-asks promptlink's own content script for the result with
+asks undertext's own content script for the result with
 `chrome.tabs.sendMessage`. There is no `activeTab`, `tabs`, `storage`,
 `scripting`, `cookies` or `webRequest`, and the extension makes no network
 requests.
@@ -42,7 +42,7 @@ in the package; regular expressions are built from those bundled rules with
 
 ## Data usage
 
-promptlink does not collect, store or send any user data. Page content is read
+undertext does not collect, store or send any user data. Page content is read
 only in memory, on your device, to decide whether to show the badge, and is
 discarded when you leave the page.
 
@@ -64,6 +64,6 @@ Certifications to tick:
 - I do not use or transfer user data for purposes that are unrelated to my item's single purpose.
 - I do not use or transfer user data to determine creditworthiness or for lending purposes.
 
-Privacy policy URL: https://wido777.github.io/promptlink/privacy.html
+Privacy policy URL: https://wido777.github.io/undertext/privacy.html
 (`docs/privacy.html`, which describes the same permissions and says no data is
 collected).

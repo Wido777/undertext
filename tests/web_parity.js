@@ -1,8 +1,8 @@
 // Reads a JSON list of inputs on stdin, runs the web engine, prints results.
-// Used by tests/test_web_parity.py. Not needed to use promptlink.
+// Used by tests/test_web_parity.py. Not needed to use undertext.
 const path = require("path");
 require(path.join(__dirname, "..", "docs", "rules.js"));
-const pl = require(path.join(__dirname, "..", "docs", "promptlink.js"));
+const pl = require(path.join(__dirname, "..", "docs", "undertext.js"));
 const page = require(path.join(__dirname, "..", "docs", "page.js"));
 
 let input = "";

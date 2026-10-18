@@ -1,15 +1,15 @@
-// promptlink content script: reads the page you are on, as rendered, and
+// undertext content script: reads the page you are on, as rendered, and
 // looks for (1) text that speaks to an AI and gives it orders, noting whether
 // you can see it, and (2) AI-assistant links with poisoned prompts.
 // Runs entirely in the page; nothing is stored or sent anywhere.
 (function () {
   "use strict";
-  if (window.__promptlinkLoaded) return;
-  window.__promptlinkLoaded = true;
+  if (window.__undertextLoaded) return;
+  window.__undertextLoaded = true;
 
   const api = globalThis.browser || globalThis.chrome;
-  const PL = globalThis.promptlink;
-  const PG = globalThis.promptlinkPage;
+  const PL = globalThis.undertext;
+  const PG = globalThis.undertextPage;
 
   const SKIP = new Set(["SCRIPT", "STYLE", "NOSCRIPT", "SVG", "MATH", "IFRAME", "OBJECT", "CANVAS",
                         "SELECT", "OPTION", "TEMPLATE", "HEAD", "TITLE"]);
@@ -206,9 +206,9 @@
     const verdict = worst === 2 ? "DANGEROUS" : worst === 1 ? "SUSPICIOUS" : "LOOKS_SAFE";
     last = { verdict, content, links, url: location.href, ms: Math.round(performance.now() - started) };
     const flaggedCount = content.findings.length + links.filter((r) => FLAGGED[r.verdict]).length;
-    const title = verdict === "LOOKS_SAFE" ? "promptlink: nothing hidden for AI found"
-      : "promptlink: " + flaggedCount + " thing(s) on this page aimed at AI";
-    try { api.runtime.sendMessage({ type: "promptlink:result", verdict, title }); } catch (e) { /* extension reloaded */ }
+    const title = verdict === "LOOKS_SAFE" ? "undertext: nothing hidden for AI found"
+      : "undertext: " + flaggedCount + " thing(s) on this page aimed at AI";
+    try { api.runtime.sendMessage({ type: "undertext:result", verdict, title }); } catch (e) { /* extension reloaded */ }
     return last;
   }
 
@@ -246,8 +246,8 @@
 
   api.runtime.onMessage.addListener((msg, sender, reply) => {
     if (!msg) return;
-    if (msg.type === "promptlink:scan") { reply(publicResult(scan())); return; }
-    if (msg.type === "promptlink:show") { reply(show(msg.kind, msg.i)); return; }
+    if (msg.type === "undertext:scan") { reply(publicResult(scan())); return; }
+    if (msg.type === "undertext:show") { reply(show(msg.kind, msg.i)); return; }
   });
 
   // Scan once the page is idle, and again shortly after for buttons that
