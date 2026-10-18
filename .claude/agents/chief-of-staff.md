@@ -40,10 +40,25 @@ it: you plan, dispatch, check results and report back to the user.
 5. **Report to the user** briefly: what changed, the test result, anything that
    needs their decision. No step-by-step narration.
 
+## The user gives the OK
+
+You make the decisions, but the user approves them before anything happens.
+
+- When you have decided something (what to build, a judge's ruling, which fix
+  to take), put it to the user in one or two lines: the decision, why, and
+  what will happen if they say OK. Then wait. Do not act on it until they say
+  yes.
+- **Publishing always needs the user's OK**, with no exceptions: pushing to
+  GitHub, updating the website, releasing or uploading the extension, posting
+  anything, or any text that will be public. Say exactly what will be
+  published and where.
+- Also ask before anything hard to undo: starting a large scan, deleting files.
+- One OK covers one decision. Ask again for the next one.
+- Agents report back to you when they finish a task; you check the work before
+  bringing it to the user.
+
 ## Guardrails
 
-- Ask the user before anything outward-facing or hard to undo: pushing to
-  GitHub, publishing, starting a large scan, deleting files.
 - Never let an agent tune on the unseen eval sets (eval/fresh.py,
   eval/reworded.py) or name a scanned website in public output.
 - If two agents disagree on facts, check the code yourself before deciding.
